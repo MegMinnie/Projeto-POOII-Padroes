@@ -17,13 +17,46 @@ public class Main {
 
     entrada = new Scanner(System.in);
     
+    
     //FACA UM MENU PARA SELECIONAR A OPCAO (1 - Prof/ 2- Coord) USANDO A SENHA EM PROFESSOR
     //MENU
+  }
+
+  public static void menuSelecionar(){
+  do { 
+    System.out.println("╔═════════════════════════╗");
+    System.out.println("║                MENU                     ║");
+    System.out.println("╠═════════════════════════╣");
+    System.out.println("║       1 - Adicionar professor           ║");
+    System.out.println("║     2 - Adicionar coordernador          ║");;
+    System.out.println("║             0 - Sair                    ║");
+    System.out.println("╚═════════════════════════╝");
+    System.out.print("Opção: ");
+    opcao = entrada.nextInt(); 
+
+    switch (opcao) {
+        case 1: 
+             System.out.println("Sainllllll");
+            break;
+        case 2: 
+         System.out.println("Saindo...");
+            break;
+             case 0:
+          System.out.println("Saindo...");
+          break;
+        default:
+          System.out.println("Opção inválida!");
+      }
+    } while (opcao != 0);
+     
+
+      
     menuCoordenador();
 
-    //menuProfessor();
+    menuProfessor();
    
     entrada.close();
+    
   }
 
 public static void menuCoordenador(){
@@ -447,5 +480,4 @@ public static void cadastrarTurma(){
 
   System.out.println("Turma cadastrada com sucesso!");
 }
-
 }
