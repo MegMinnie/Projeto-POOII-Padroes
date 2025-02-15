@@ -7,15 +7,14 @@ import java.util.Scanner;
 public class Main {
   
   
-  //APLIQUE SINGLETON, REMOVA ESSA DECLARACAO E USO GetInstance nos métodos que chamam db
-  static DataBase db;
+  //APLIQUE SINGLETON, REMOVA ESSA DECLARACAO E USO GetInstance nos métodos que chamam DataBase.getInstance()
+    
   static int opcao;
   static Scanner entrada;
   //static Nota nota;
 
   public static void main(String[] args) {
-    //REMOVA 
-    db = new DataBase(); 
+
     entrada = new Scanner(System.in);
     
     //FACA UM MENU PARA SELECIONAR A OPCAO (1 - Prof/ 2- Coord) USANDO A SENHA EM PROFESSOR
@@ -135,35 +134,34 @@ public static void menuProfessor(){
 
 }
 
-
 public static void cadastarCoordenador(){
-  
+
   System.out.println("Lista de professores:");
-    for (int i = 0; i < db.getProfessores().size(); i++) {
-        System.out.printf("%d - %s\n", i + 1, db.getProfessores().get(i).getNome());
+    for (int i = 0; i < DataBase.getInstance().getProfessores().size(); i++) {
+        System.out.printf("%d - %s\n", i + 1, DataBase.getInstance().getProfessores().get(i).getNome());
     }
 
     System.out.print("Escolha o professor coordenador: ");
     int escolhaProfessor = entrada.nextInt();
 
-    if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size()-1) {
+    if (escolhaProfessor < 0 || escolhaProfessor > DataBase.getInstance().getProfessores().size()-1) {
         System.out.println("Escolha inválida.");
         return;
     }
 
     System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
-    for (int i = 0; i < db.getCursos().size(); i++) {
-      System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
+    for (int i = 0; i < DataBase.getInstance().getCursos().size(); i++) {
+      System.out.printf("%d - %s\n", i + 1, DataBase.getInstance().getCursos().get(i).getNomeCurso());
     }
     int escolhaCurso = entrada.nextInt();
 
-    if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()-1) {
+    if (escolhaCurso < 0 || escolhaCurso > DataBase.getInstance().getCursos().size()-1) {
         System.out.println("Escolha inválida.");
         return;
     }
 
-    db.getCursos().get(escolhaCurso).vincularCoordenador( db.getProfessores().get(escolhaProfessor));
-    System.out.println(db.getProfessores().get(escolhaProfessor).getNome() + " agora é o coordenador.");
+    DataBase.getInstance().getCursos().get(escolhaCurso).vincularCoordenador( DataBase.getInstance().getProfessores().get(escolhaProfessor));
+    System.out.println(DataBase.getInstance().getProfessores().get(escolhaProfessor).getNome() + " agora é o coordenador.");
 }
 
 
@@ -172,33 +170,33 @@ public static void cadastrarNotas(){
    
    System.out.println("Selecione a turma");
     
-    for (int i = 0, totalTurmas = db.getTurmas().size(); i < totalTurmas; i++) {
-      System.out.println(i + " - " +db.getTurmas().get(i).getIdentificacao() + " Curso "+ db.getTurmas().get(i).getCurso().getNomeCurso());
+    for (int i = 0, totalTurmas = DataBase.getInstance().getTurmas().size(); i < totalTurmas; i++) {
+      System.out.println(i + " - " +DataBase.getInstance().getTurmas().get(i).getIdentificacao() + " Curso "+ DataBase.getInstance().getTurmas().get(i).getCurso().getNomeCurso());
     } 
    
     int escolhaTurma = entrada.nextInt();
 
-    if (escolhaTurma < 0 || escolhaTurma > db.getTurmas().size()-1) {
+    if (escolhaTurma < 0 || escolhaTurma > DataBase.getInstance().getTurmas().size()-1) {
         System.out.println("Escolha inválida.");
         return;
     }
 
 
-    System.out.println("Turma "+db.getTurmas().get(escolhaTurma).getIdentificacao()+" selecionada, selecione o estudante");
+    System.out.println("Turma "+DataBase.getInstance().getTurmas().get(escolhaTurma).getIdentificacao()+" selecionada, selecione o estudante");
 
-    for (int i = 0, totalAlunos = db.getTurmas().get(escolhaTurma).getAlunosTurma().size(); i < totalAlunos; i++) {
-      System.out.println(i + " - " +db.getTurmas().get(escolhaTurma).getAlunosTurma().get(i).getAluno().getNome());
+    for (int i = 0, totalAlunos = DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().size(); i < totalAlunos; i++) {
+      System.out.println(i + " - " +DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().get(i).getAluno().getNome());
     } 
     
     int escolhaEstudante = entrada.nextInt();
 
-    if (escolhaEstudante < 0 || escolhaEstudante > db.getTurmas().get(escolhaTurma).getAlunosTurma().size()-1) {
+    if (escolhaEstudante < 0 || escolhaEstudante > DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().size()-1) {
         System.out.println("Escolha inválida.");
         return;
     }
 
-    Aluno aluno = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getAluno();
-    Nota nota = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getNota();
+    Aluno aluno = DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getAluno();
+    Nota nota = DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getNota();
 
     System.out.printf("Notas do aluno(a): %s\n", aluno.getNome());
    
@@ -213,7 +211,7 @@ public static void cadastrarNotas(){
 
     System.out.printf("Média: %.2f\n", nota.calcularMedia());
     System.out.print("Situação: ");
-    db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
+    DataBase.getInstance().getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
     nota.verificarSituacao();
 
 }
@@ -221,9 +219,9 @@ public static void cadastrarNotas(){
 
 public static void mostrarEstatistica(){
     System.out.println("Estatisticas");
-    for( int i = 0; i < db.getTurmas().size(); i++){
-      System.out.println("Dados da turma " + db.getTurmas().get(i).getIdentificacao());
-      db.getTurmas().get(i).setEstatica();
+    for( int i = 0; i < DataBase.getInstance().getTurmas().size(); i++){
+      System.out.println("Dados da turma " + DataBase.getInstance().getTurmas().get(i).getIdentificacao());
+      DataBase.getInstance().getTurmas().get(i).setEstatica();
       System.out.println();
     }
 }
@@ -232,15 +230,15 @@ public static void mostrarEstatistica(){
 public static void exibirListaRecuperacao(){
   System.out.println("Lista de recuperação");
           System.out.println("Escolha a turma para listar alunos em recuperação:");
-          for (int i = 0; i < db.getTurmas().size(); i++) {
-              System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+          for (int i = 0; i < DataBase.getInstance().getTurmas().size(); i++) {
+              System.out.println(i + " - Turma: " + DataBase.getInstance().getTurmas().get(i).getIdentificacao());
           }
           int turmaEscolhida = entrada.nextInt();
-          if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
+          if (turmaEscolhida < 0 || turmaEscolhida > DataBase.getInstance().getTurmas().size()-1) {
               System.out.println("Turma inválida!");
               return;
           }
-          Turma turma = db.getTurmas().get(turmaEscolhida);
+          Turma turma = DataBase.getInstance().getTurmas().get(turmaEscolhida);
           int qtdAluno = 0;
           for (AlunoTurma aluno : turma.getAlunosTurma()) {
                if (aluno.getNota().calcularMedia() >= 2.5 && aluno.getNota().calcularMedia() < 7) {
@@ -259,17 +257,17 @@ public static void exibirListaRecuperacao(){
 
 
 public static void exibirListaGeral(){
-  db.getTurmas().get(0).exibirDados();
+  DataBase.getInstance().getTurmas().get(0).exibirDados();
   System.out.println();
 
   System.out.println("Cursos:");
-  for (Curso curso : db.getCursos()) {
+  for (Curso curso : DataBase.getInstance().getCursos()) {
     System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
   }
 
-  db.getTurmas().get(1).exibirDados();
+  DataBase.getInstance().getTurmas().get(1).exibirDados();
   System.out.println("Cursos:");
-  for (Curso curso : db.getCursos()) {
+  for (Curso curso : DataBase.getInstance().getCursos()) {
     System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
   }
 }
@@ -277,7 +275,7 @@ public static void exibirListaGeral(){
 public static void exibirHistorico(){
 
     System.out.println("Histórico de alterações dos alunos:");
-    for (Aluno aluno : db.getAlunos()) {
+    for (Aluno aluno : DataBase.getInstance().getAlunos()) {
         aluno.exibirHistorico();
         System.out.println();
     }
@@ -285,8 +283,8 @@ public static void exibirHistorico(){
 
 
 public static void cadastrarProfessor(){
-  //ADICIONE EM TODOS OS MÉTODOS QUE USAM db
- //DataBase db = DataBase.getInstace();
+  //ADICIONE EM TODOS OS MÉTODOS QUE USAM DataBase.getInstance()
+ //DataBase DataBase.getInstance() = DataBase.getInstace();
 
   System.out.println(" ---- Cadastrar Professor ----");
   Professor professor = new Professor();
@@ -306,7 +304,7 @@ public static void cadastrarProfessor(){
   System.out.print("Informe o SIAPE: ");
   professor.setSiape(entrada.nextLine());
 
-  db.getProfessores().add(professor);
+  DataBase.getInstance().getProfessores().add(professor);
   System.out.println("Professor cadastrado com sucesso!");
 
 }
@@ -315,31 +313,31 @@ public static void vincularProfessorTurma(){
 
   System.out.println(" ---- Vincular Professor a Turma ----");
   System.out.println("Escolha o professor para vincular:");
-  for (int i = 0; i < db.getProfessores().size(); i++) {
-      System.out.println(i + " - Prof.: " + db.getProfessores().get(i).getNome() + "(SIAPE: "+ db.getProfessores().get(i).getSiape()+")" );
+  for (int i = 0; i < DataBase.getInstance().getProfessores().size(); i++) {
+      System.out.println(i + " - Prof.: " + DataBase.getInstance().getProfessores().get(i).getNome() + "(SIAPE: "+ DataBase.getInstance().getProfessores().get(i).getSiape()+")" );
   }
   int profEscolhido = entrada.nextInt();
-  if (profEscolhido < 0 || profEscolhido > db.getProfessores().size()-1) {
+  if (profEscolhido < 0 || profEscolhido > DataBase.getInstance().getProfessores().size()-1) {
       System.out.println("Professor inválida!");
       return;
   }
 
   System.out.println("Escolha a truma para vincular o professor");
-  for (int i = 0; i < db.getTurmas().size(); i++) {
-      System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+  for (int i = 0; i < DataBase.getInstance().getTurmas().size(); i++) {
+      System.out.println(i + " - Turma: " + DataBase.getInstance().getTurmas().get(i).getIdentificacao());
   }
   int turmaEscolhida = entrada.nextInt();
-  if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
+  if (turmaEscolhida < 0 || turmaEscolhida > DataBase.getInstance().getTurmas().size()-1) {
       System.out.println("Turma inválida!");
       return;
   }
 
-  System.out.println("Vincular Professor "+ db.getProfessores().get(profEscolhido).getNome()+ " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao() );
+  System.out.println("Vincular Professor "+ DataBase.getInstance().getProfessores().get(profEscolhido).getNome()+ " a Turma " + DataBase.getInstance().getTurmas().get(turmaEscolhida).getIdentificacao() );
   System.out.println("1 - Sim \n2 - Não");
   int opcEscolhida = entrada.nextInt();
   if(opcEscolhida == 1){
     System.out.println("Professor Vinculado com Sucesso");
-    db.getTurmas().get(turmaEscolhida).adicionarProfessor( db.getProfessores().get(profEscolhido));
+    DataBase.getInstance().getTurmas().get(turmaEscolhida).adicionarProfessor( DataBase.getInstance().getProfessores().get(profEscolhido));
   }else if(opcEscolhida == 2){
     System.out.println("Operação Cancelada");
   }else{
@@ -383,7 +381,7 @@ public static void cadastrarAluno() {
   System.out.print("Informe a matrícula: ");
   aluno.setMatricula(entrada.nextLine());
   
-  db.getAlunos().add(aluno);
+  DataBase.getInstance().getAlunos().add(aluno);
   System.out.println("Aluno cadastrado com sucesso!");
 
 }
@@ -392,31 +390,31 @@ public static void vincularEstudanteTurma(){
 
   System.out.println(" ---- Vincular Estudante a Turma ----");
   System.out.println("Escolha o estudante para vincular:");
-  for (int i = 0; i < db.getAlunos().size(); i++) {
-      System.out.println(i + " - Prof.: " + db.getAlunos().get(i).getNome() );
+  for (int i = 0; i < DataBase.getInstance().getAlunos().size(); i++) {
+      System.out.println(i + " - Prof.: " + DataBase.getInstance().getAlunos().get(i).getNome() );
   }
   int alunoEscolhido = entrada.nextInt();
-  if (alunoEscolhido < 0 || alunoEscolhido > db.getAlunos().size()-1) {
+  if (alunoEscolhido < 0 || alunoEscolhido > DataBase.getInstance().getAlunos().size()-1) {
       System.out.println("Professor inválida!");
       return;
   }
 
   System.out.println("Escolha a truma para vincular o professor");
-  for (int i = 0; i < db.getTurmas().size(); i++) {
-      System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+  for (int i = 0; i < DataBase.getInstance().getTurmas().size(); i++) {
+      System.out.println(i + " - Turma: " + DataBase.getInstance().getTurmas().get(i).getIdentificacao());
   }
   int turmaEscolhida = entrada.nextInt();
-  if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
+  if (turmaEscolhida < 0 || turmaEscolhida > DataBase.getInstance().getTurmas().size()-1) {
       System.out.println("Turma inválida!");
       return;
   }
 
-  System.out.println("Vincular Estudante "+ db.getAlunos().get(alunoEscolhido).getNome()+ " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao() +"?" );
+  System.out.println("Vincular Estudante "+ DataBase.getInstance().getAlunos().get(alunoEscolhido).getNome()+ " a Turma " + DataBase.getInstance().getTurmas().get(turmaEscolhida).getIdentificacao() +"?" );
   System.out.println("1 - Sim \n2 - Não");
   int opcEscolhida = entrada.nextInt();
   if(opcEscolhida == 1){
     System.out.println("Professor Vinculado com Sucesso");
-    db.getTurmas().get(turmaEscolhida).adicionarAluno( new AlunoTurma( db.getAlunos().get(alunoEscolhido)));
+    DataBase.getInstance().getTurmas().get(turmaEscolhida).adicionarAluno( new AlunoTurma( DataBase.getInstance().getAlunos().get(alunoEscolhido)));
   }else if(opcEscolhida == 2){
     System.out.println("Operação Cancelada");
   }else{
@@ -435,17 +433,17 @@ public static void cadastrarTurma(){
   turma.setSemestre(entrada.nextLine());
 
   System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
-  for (int i = 0; i < db.getCursos().size(); i++) {
-    System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
+  for (int i = 0; i < DataBase.getInstance().getCursos().size(); i++) {
+    System.out.printf("%d - %s\n", i + 1, DataBase.getInstance().getCursos().get(i).getNomeCurso());
   }
   int escolhaCurso = entrada.nextInt();
 
-  if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()-1) {
+  if (escolhaCurso < 0 || escolhaCurso > DataBase.getInstance().getCursos().size()-1) {
       System.out.println("Escolha inválida.");
       return;
   }
 
-  turma.setCurso( db.getCursos().get(escolhaCurso));
+  turma.setCurso( DataBase.getInstance().getCursos().get(escolhaCurso));
 
   System.out.println("Turma cadastrada com sucesso!");
 }
