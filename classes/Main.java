@@ -461,9 +461,10 @@ public static void cadastrarTurma(){
 
   System.out.print("Informe identificação: ");
   turma.setIdentificacao(entrada.nextLine());
+      boolean s = false;
 
   System.out.print("Informe o semestre: ");
-  turma.setSemestre(entrada.nextLine());
+      String Semestre = entrada.nextLine();
 
   System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
   for (int i = 0; i < DataBase.getInstance().getCursos().size(); i++) {
@@ -473,6 +474,7 @@ public static void cadastrarTurma(){
 
   if (escolhaCurso < 0 || escolhaCurso > DataBase.getInstance().getCursos().size()-1) {
       System.out.println("Escolha inválida.");
+      
       return;
   }
 
