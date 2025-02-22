@@ -1,10 +1,13 @@
 
 package classes;
 
+import java.util.ArrayList;
+
 
 public class Semestre {
     private String nome;
     private boolean ativa;
+    private ArrayList <IObserver>observadores;
     
     public Semestre(){
         
@@ -21,6 +24,7 @@ public class Semestre {
 
     public void setAtiva(boolean ativa){
         this.ativa = ativa;
+        notifyObservers();
     }
     
      public String getNome(){
@@ -30,4 +34,18 @@ public class Semestre {
     public void setNome(String nome){
         this.nome = nome;
     }
+    
+    public void addObservadores(IObserver observer){
+        observadores.add(observer);
+    }
+    
+      public void removeObservadores(IObserver observer){
+        observadores.remove(observer);
+    }
+      
+      public void notifyObservers (){
+          for(int i=0; i<observadores.size(); i++){
+           observadores.get(i).update(ativa);
+          }
+      }
 }
