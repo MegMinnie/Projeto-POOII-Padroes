@@ -464,7 +464,7 @@ public static void cadastrarTurma(){
       boolean s = false;
 
   System.out.print("Informe o semestre: ");
-      String Semestre = entrada.nextLine();
+     turma.setSemestre( new Semestre(entrada.nextLine(), true)) ;
 
   System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
   for (int i = 0; i < DataBase.getInstance().getCursos().size(); i++) {
