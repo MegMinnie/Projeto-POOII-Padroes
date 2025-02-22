@@ -1,10 +1,11 @@
 package classes;
 
-public class Nota {
+public class Nota implements IObserver {
 private Double nota1;
 private Double nota2;
 private Double nota3;
 private Double notaRecuperacao;
+private boolean bloqueado;
   
   public Nota(){
    this.nota1 = 0.0;
@@ -15,9 +16,11 @@ private Double notaRecuperacao;
 
 
   public Nota(Double nota1, Double nota2, Double nota3) {
+      if(!bloqueado){
     this.nota1 = (nota1 != null) ? nota1 : 0.0;
     this.nota2 = (nota2 != null) ? nota2 : 0.0;
     this.nota3 = (nota3 != null) ? nota3 : 0.0; 
+      }
 }
 
 
@@ -68,6 +71,10 @@ public boolean verificarSituacao() {
   }
 
   return aprovado;
+}
+
+public void update(boolean param){
+    bloqueado = ! param;
 }
 
 public void setNotaRecuperacao(double nota){
