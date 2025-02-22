@@ -3,21 +3,31 @@ package classes;
 
 
 public class Semestre {
-    private boolean frag;
+    private String nome;
+    private boolean ativa;
     
     public Semestre(){
         
     }
     
-    public Semestre ( boolean frag){
-        this.frag = frag;
+    public Semestre (String nome, boolean ativa){
+        this.ativa = ativa;
+        this.nome = nome;
     }
     
-       public boolean getFrag(){
-        return frag;
+       public boolean getAtiva(){
+        return ativa;
     }
 
-    public void setFrag(boolean frag){
-        this.frag = frag;
+    public void setAtiva(boolean ativa){
+        this.ativa = ativa;
+    }
+    
+     public String getNome(){
+        return nome;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
     }
 }
