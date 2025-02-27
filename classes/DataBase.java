@@ -31,8 +31,10 @@ public class DataBase {
         cursos.add(new Curso("Linguagem de programação", "3"));
         cursos.add(new Curso("Estrutura de dados", "5"));
 
-        turmas.add(new Turma("20243", cursos.get(0), "5"));
-        turmas.add(new Turma("20247", cursos.get(1), "6"));
+        //turmas.add(new Turma("20243", cursos.get(0), "5"));
+       // turmas.add(new Turma("20247", cursos.get(1), "6"));
+
+       turmas.add(new Turma());
 
         turmas.get(0).adicionarProfessor(professores.get(0));
         for (Aluno aluno : alunos) {
