@@ -4,14 +4,12 @@ public class Nota implements IObserver {
 private Double nota1;
 private Double nota2;
 private Double nota3;
-private Double notaRecuperacao;
 private boolean bloqueado;
   
   public Nota(){
    this.nota1 = 0.0;
    this.nota2 = 0.0;
    this.nota3 = 0.0;
-   this.notaRecuperacao = 0.0;
   }
 
 
@@ -78,9 +76,8 @@ public void update(boolean param){
 }
 
 public void setNotaRecuperacao(double nota){
-  this.notaRecuperacao = nota;
 }
-@Override
+
 public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
 }

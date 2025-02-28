@@ -18,7 +18,6 @@ public class Main {
 
     menuSelecionar();
     escolherSemestre();
-    menuProfessor();
     menuCoordenador();
  
     entrada.close();
@@ -196,33 +195,36 @@ public class Main {
        
     } 
 
-
-  public static void SelecionarProfessor() {
-    Scanner entrada = new Scanner(System.in); 
-    var professores = DataBase.getInstance().getProfessores();
-  
-    for (int i = 0; i < professores.size(); i++) {
-        System.out.printf("%d - %s\n", i + 1, professores.get(i).getNome());
-    }
-  
-    System.out.print("Escolha o professor: ");
-    int escolhaProfessor = entrada.nextInt();
-    if (escolhaProfessor < 1 || escolhaProfessor > professores.size()) {
-        System.out.println("Escolha inválida.");
-
-    }
-  
-   
-    Professor professorSelecionado = professores.get(escolhaProfessor - 1);
-  
-    System.out.print("Informe a senha: ");
+    public static void SelecionarProfessor() {
+      Scanner entrada = new Scanner(System.in); 
+      var professores = DataBase.getInstance().getProfessores();
     
-    System.out.println("Senha cadastrada: " + professorSelecionado.getSenha());
-  
-    entrada.close(); 
-
-    System.out.print("");
+      for (int i = 0; i < professores.size(); i++) {
+          System.out.printf("%d - %s\n", i + 1, professores.get(i).getNome());
+      }
+    
+      System.out.print("Escolha o professor: ");
+      int escolhaProfessor = entrada.nextInt();
+      if (escolhaProfessor < 1 || escolhaProfessor > professores.size()) {
+          System.out.println("Escolha inválida.");
+          entrada.close();
+          return; 
+      }
+    
+      Professor professorSelecionado = professores.get(escolhaProfessor - 1);
+    
+      System.out.print("Informe a senha: ");
+      String senhaDigitada = entrada.next();  
+      if (senhaDigitada.equals(professorSelecionado.getSenha())) {  
+          System.out.println("Senha verificada com sucesso!");
+          menuProfessor();
+      } else {
+          System.out.println("Senha inválida!");
+      }
+    
+      entrada.close(); 
   }
+  
   
   
   public static Professor selecionarCoordenador() {
