@@ -16,11 +16,10 @@ public class Main {
     
     exportarDadosEstudante();
 
-    //FACA UM MENU PARA SELECIONAR A OPCAO (1 - Prof/ 2- Coord) USANDO A SENHA EM PROFESSOR
-    //MENU
+    menuSelecionar();
+    escolherSemestre();
+    menuProfessor();
     menuCoordenador();
-
-    //menuProfessor();
  
     entrada.close();
   }
@@ -42,12 +41,15 @@ public class Main {
       switch (opcao) {
           case 1: 
           SelecionarProfessor();
+          menuProfessor();
               break;
           case 2: 
           selecionarCoordenador();
+          menuCoordenador();
               break; 
                case 0:
-            System.out.println("Saindo...");
+            System.out.println("Saindo...");  
+
             break;
           default:
             System.out.println("Opção inválida!");
@@ -164,6 +166,37 @@ public class Main {
   }
 
 
+  public static void escolherSemestre(){
+    do { 
+      System.out.println("╔════════════════════════════════════╗");
+      System.out.println("║                MENU                ║");
+      System.out.println("╠════════════════════════════════════╣");
+      System.out.println("║           1 - Semestre 5           ║");
+      System.out.println("║           2 - Semestre 6           ║");;
+      System.out.println("║             0 - Sair               ║");
+      System.out.println("╚════════════════════════════════════╝");
+      System.out.print("Opção: ");
+      opcao = entrada.nextInt(); 
+  
+      switch (opcao) {
+          case 1: 
+          System.out.println("Você está no 5 semestre"); 
+              break;
+          case 2: 
+          System.out.println("Você está no 6 semestre"); 
+              break; 
+               case 0:
+            System.out.println("Saindo...");  
+
+            break;
+          default:
+            System.out.println("Opção inválida!");
+        }
+      } while (opcao != 0);
+       
+    } 
+
+
   public static void SelecionarProfessor() {
     Scanner entrada = new Scanner(System.in); 
     var professores = DataBase.getInstance().getProfessores();
@@ -187,6 +220,8 @@ public class Main {
     System.out.println("Senha cadastrada: " + professorSelecionado.getSenha());
   
     entrada.close(); 
+
+    System.out.print("");
   }
   
   
