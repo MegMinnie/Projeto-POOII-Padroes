@@ -44,8 +44,8 @@ public class Main {
           SelecionarProfessor();
               break;
           case 2: 
-          SelecionarCoordenador();
-              break;
+          selecionarCoordenador();
+              break; 
                case 0:
             System.out.println("Saindo...");
             break;
@@ -190,9 +190,28 @@ public class Main {
   }
   
   
-  public static void SelecionarCoordenador(){
-  
-  }
+  public static Professor selecionarCoordenador() {
+    DataBase db = DataBase.getInstance();
+
+    System.out.println("Coordenadores cadastrados:");
+    for (int i = 0; i < db.getCursos().size(); i++) {
+        Curso curso = db.getCursos().get(i);
+        if (curso.getCoordenador() != null) {
+            System.out.printf("%d - %s (Curso: %s)\n", i + 1, curso.getCoordenador().getNome(), curso.getNomeCurso());
+        }
+    }
+
+    System.out.print("Escolha um coordenador pelo número: ");
+    int escolha = entrada.nextInt() - 1;
+
+    if (escolha < 0 || escolha >= db.getCursos().size() || db.getCursos().get(escolha).getCoordenador() == null) {
+        System.out.println("Escolha inválida.");
+        return null;
+    }
+
+    return db.getCursos().get(escolha).getCoordenador();
+}
+
 
   public static void cadastarCoordenador(){
     DataBase db = DataBase.getInstance();
