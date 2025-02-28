@@ -26,9 +26,8 @@ public class Main {
     entrada = new Scanner(System.in);
     
     exportarDadosEstudante();
-
-    menuSelecionar();
     escolherSemestre();
+    menuSelecionar();
     menuCoordenador();
  
     entrada.close();
@@ -51,7 +50,6 @@ public class Main {
       switch (opcao) {
           case 1: 
           SelecionarProfessor();
-          menuProfessor();
               break;
           case 2: 
           selecionarCoordenador();
@@ -181,8 +179,7 @@ public class Main {
       System.out.println("╔════════════════════════════════════╗");
       System.out.println("║                MENU                ║");
       System.out.println("╠════════════════════════════════════╣");
-      System.out.println("║           1 - Semestre 5           ║");
-      System.out.println("║           2 - Semestre 6           ║");;
+      System.out.println("║      1 - informar o semestre       ║");
       System.out.println("║             0 - Sair               ║");
       System.out.println("╚════════════════════════════════════╝");
       System.out.print("Opção: ");
@@ -190,11 +187,8 @@ public class Main {
   
       switch (opcao) {
           case 1: 
-          System.out.println("Você está no 5 semestre"); 
+          informarSemestre();
               break;
-          case 2: 
-          System.out.println("Você está no 6 semestre"); 
-              break; 
                case 0:
             System.out.println("Saindo...");  
 
@@ -237,29 +231,66 @@ public class Main {
   }
   
   
-  
   public static Professor selecionarCoordenador() {
     DataBase db = DataBase.getInstance();
+    Scanner entrada = new Scanner(System.in); 
+
+    boolean temCoordenador = false; 
 
     System.out.println("Coordenadores cadastrados:");
     for (int i = 0; i < db.getCursos().size(); i++) {
         Curso curso = db.getCursos().get(i);
         if (curso.getCoordenador() != null) {
+            temCoordenador = true; 
             System.out.printf("%d - %s (Curso: %s)\n", i + 1, curso.getCoordenador().getNome(), curso.getNomeCurso());
         }
+    }
+
+   
+    if (!temCoordenador) {
+        System.out.println("Nenhum coordenador cadastrado.");
+        cadastarCoordenador(); 
+        return null; 
     }
 
     System.out.print("Escolha um coordenador pelo número: ");
     int escolha = entrada.nextInt() - 1;
 
+  
     if (escolha < 0 || escolha >= db.getCursos().size() || db.getCursos().get(escolha).getCoordenador() == null) {
         System.out.println("Escolha inválida.");
         return null;
     }
 
+    
     return db.getCursos().get(escolha).getCoordenador();
 }
 
+  
+
+public static void informarSemestre() {
+  Scanner entrada = new Scanner(System.in); 
+  var cursos = DataBase.getInstance().getCursos(); 
+
+ 
+  for (int i = 0; i < cursos.size(); i++) {
+      System.out.printf("%d - %s\n", i + 1, cursos.get(i).getQtdSemestre()); 
+  }
+
+  System.out.print("Escolha o semestre: ");
+  int escolhaSemestre = entrada.nextInt();
+
+ 
+  if (escolhaSemestre < 1 || escolhaSemestre > cursos.size()) {
+      System.out.println("Escolha inválida.");
+      return; 
+  }
+
+  Curso semestreSelecionado = cursos.get(escolhaSemestre - 1);
+
+  System.out.println("Semestre selecionado: " + semestreSelecionado.getQtdSemestre());
+
+}
 
   public static void cadastarCoordenador(){
     DataBase db = DataBase.getInstance();
@@ -284,6 +315,7 @@ public class Main {
 
       if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()-1) {
           System.out.println("Escolha inválida.");
+          cadastarCoordenador();
           return;
       }
 
