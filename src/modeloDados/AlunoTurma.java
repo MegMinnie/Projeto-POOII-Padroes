@@ -1,4 +1,4 @@
-package classes;
+package src.modeloDados;
 
 public class AlunoTurma {
     private Aluno aluno;

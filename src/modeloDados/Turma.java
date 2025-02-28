@@ -1,7 +1,9 @@
-package classes;
+package src.modeloDados;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import src.Historico.Log;
 
 public class Turma {
 

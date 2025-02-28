@@ -1,4 +1,6 @@
-package classes;
+package src.modeloDados;
+
+import src.IO.IObserver;
 
 public class Nota implements IObserver {
 private Double nota1;

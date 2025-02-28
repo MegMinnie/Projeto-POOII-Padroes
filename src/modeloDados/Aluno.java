@@ -1,6 +1,8 @@
-package classes;
+package src.modeloDados;
 
-public class Aluno extends Pessoa implements Printable {
+import src.IO.IOPrintable;
+
+public class Aluno extends Pessoa implements IOPrintable {
 private String matricula;
 
  

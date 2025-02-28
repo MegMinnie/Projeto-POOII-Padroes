@@ -1,4 +1,4 @@
-package classes;
+package src.exportacaoImportacao;
 
 //VOCÊ NÃO DEVE MODIFICAR ESTA CLASSE
 public class ImportDataMEC {

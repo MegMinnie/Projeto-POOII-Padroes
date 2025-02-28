@@ -1,6 +1,8 @@
-package classes;
+package src.modeloDados;
 
-public abstract class Pessoa implements Printable{
+import src.IO.IOPrintable;
+
+public abstract class Pessoa implements IOPrintable{
 
   private String nome;
   private String cpf;

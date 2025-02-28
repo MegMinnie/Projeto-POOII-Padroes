@@ -1,8 +1,19 @@
-package classes;
+package src.principal;
 
 //import java.net.ProtocolFamily;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import src.bancoDados.DataBase;
+import src.exportacaoImportacao.ExportData;
+import src.exportacaoImportacao.ImportDataMEC;
+import src.modeloDados.Aluno;
+import src.modeloDados.AlunoTurma;
+import src.modeloDados.Curso;
+import src.modeloDados.Nota;
+import src.modeloDados.Professor;
+import src.modeloDados.Semestre;
+import src.modeloDados.Turma;
 
 public class Main {
   

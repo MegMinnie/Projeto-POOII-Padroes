@@ -1,6 +1,13 @@
-package classes;
+package src.bancoDados;
 
 import java.util.ArrayList;
+
+import src.modeloDados.Aluno;
+import src.modeloDados.AlunoTurma;
+import src.modeloDados.Curso;
+import src.modeloDados.Professor;
+import src.modeloDados.Semestre;
+import src.modeloDados.Turma;
 
 public class DataBase {
     

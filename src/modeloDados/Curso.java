@@ -1,4 +1,4 @@
-package classes;
+package src.modeloDados;
 
 public class Curso {
 

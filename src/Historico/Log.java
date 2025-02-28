@@ -1,4 +1,7 @@
-package classes;
+package src.Historico;
+
+import src.modeloDados.Nota;
+import src.modeloDados.Professor;
 
 public class Log {
   private Nota notaAnterior;
