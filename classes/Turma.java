@@ -65,8 +65,6 @@ public void setSemestre( Semestre semestre){
     this.alunos = alunos;
   }
 
-
-  
   public void adicionarProfessor(Professor professor) {
     professor.setCoodernador(false); 
     professores.add(professor);
@@ -100,12 +98,6 @@ public void setSemestre( Semestre semestre){
     System.out.println("Total de reprovados: " + totalReprovados);
     System.out.println("Total de recuperação: " + totalRecuperação);
     }
-
-
-  
-
- 
-
 
   public void alterarNotaEstudante(Professor coordenador, AlunoTurma alunoTurma, Nota novaNota) {
     if (coordenador.getCoordenador()){
