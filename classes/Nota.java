@@ -77,5 +77,12 @@ public void update(boolean param){
     bloqueado = ! param;
 }
 
+public void setNotaRecuperacao(double nota){
+  this.notaRecuperacao = nota;
+}
+@Override
+public String toString(){
+  return this.nota1 + " , " + this.nota2 + " " + this.nota3;
+}
 
 }

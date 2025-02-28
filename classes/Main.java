@@ -1,6 +1,6 @@
 package classes;
 
-import java.net.ProtocolFamily;
+//import java.net.ProtocolFamily;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -176,15 +176,13 @@ public class Main {
     int escolhaProfessor = entrada.nextInt();
     if (escolhaProfessor < 1 || escolhaProfessor > professores.size()) {
         System.out.println("Escolha inválida.");
-        return;
+
     }
   
    
     Professor professorSelecionado = professores.get(escolhaProfessor - 1);
   
     System.out.print("Informe a senha: ");
-    String senha = entrada.next(); 
-  
     
     System.out.println("Senha cadastrada: " + professorSelecionado.getSenha());
   
