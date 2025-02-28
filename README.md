@@ -1,13 +1,13 @@
 <div align="center">
   
-# Sistema Escolar
+# Projeto-POOII-Padroes
 
 <img src="https://img.shields.io/badge/JAVA-23.1-blue" />
 <img src="https://img.shields.io/badge/LICENSE-MIT-yellow" />
 
 </div>
 
-## Projeto - Sistema Escolar
+## Projeto-POOII-Padroes
 
 Este projeto é uma atividade avaliativa da disciplina de **Linguagem Orientada a Objetos II**, dando continuidade à primeira atividade, _"Sistema Escolar"_. Ele aplica conceitos de **refatoração** e incorpora os padrões de projeto **Singleton, Observer e Adapter**.
 
