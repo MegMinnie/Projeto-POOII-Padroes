@@ -1,5 +1,4 @@
 package src.principal;
-//teste para verificar se o meu commit ainda está com problemas
 //import java.net.ProtocolFamily;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,6 +22,7 @@ public class Main {
   static Scanner entrada;
 
   public static void main(String[] args) {
+    
     entrada = new Scanner(System.in);
     
     exportarDadosEstudante();
@@ -634,9 +634,10 @@ public static void informarSemestre() {
     return exp.ArrayToXMLFormat(data, 5 , "student");
   }
 
-  public static void importDadosEstudanteMEC(){
+  public static ImportDataMEC importDadosEstudanteMEC(){
      String data = exportarDadosEstudante();
      ImportDataMEC imec = new ImportDataMEC();
      imec.importData(data);
+     return imec;
   }
 }

@@ -14,7 +14,7 @@ public class ExportAdapter {
         return xmlToJson(xml, tag);
     }
 
-    private String xmlToJson(String xml, String tag) {
+    String xmlToJson(String xml, String tag) {
         return xml
             .replace("<?xml version=\"1.0\"?>", "")
             .replace("<data>", "{ \"data\": {")
