@@ -5,6 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExportAdapter {
+
+  public ExportAdapter() {
+    
+  }
+
     private ExportData exportData;
 
     public ExportAdapter(ExportData exportData) {
