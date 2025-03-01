@@ -26,7 +26,6 @@ public class Main {
     
     entrada = new Scanner(System.in);
     
-    exportarDadosEstudante();
     escolherSemestre();
     menuSelecionar();
     menuCoordenador();
@@ -43,6 +42,8 @@ public class Main {
       System.out.println("╠════════════════════════════════════╣");
       System.out.println("║       1 - Selecionar professor     ║");
       System.out.println("║     2 - Selecionar coordernador    ║");;
+      System.out.println("║  3 - Exportar dados dos estudantes ║");;
+      System.out.println("║    4 - importDadosEstudanteMEC     ║");;
       System.out.println("║             0 - Sair               ║");
       System.out.println("╚════════════════════════════════════╝");
       System.out.print("Opção: ");
@@ -55,6 +56,12 @@ public class Main {
           case 2: 
           selecionarCoordenador();
           menuCoordenador();
+              break; 
+              case 3: 
+              exportarDadosEstudante();
+              break;
+              case 4: 
+              importDadosEstudanteMEC();
               break; 
                case 0:
             System.out.println("Saindo...");  
@@ -612,8 +619,6 @@ public static void informarSemestre() {
     System.out.println("Turma cadastrada com sucesso!");
   }
 
-  
-  
    public static String exportarDadosEstudante() {
     DataBase db = DataBase.getInstance();
     ArrayList<String[]> data = new ArrayList<>();
@@ -629,12 +634,14 @@ public static void informarSemestre() {
 
     ExportData exp = new ExportData();
     ExportAdapter adapter = new ExportAdapter(exp);
+    System.out.println(adapter.convertToJson(data, 5, "student"));
     return adapter.convertToJson(data, 5, "student");
 }
 
   public static ImportDataMEC importDadosEstudanteMEC(){
      String data = exportarDadosEstudante();
      ImportDataMEC imec = new ImportDataMEC();
+     System.out.println(imec);
      imec.importData(data);
      return imec;
   }
