@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import src.bancoDados.DataBase;
+import src.exportacaoImportacao.ExportAdapter;
 import src.exportacaoImportacao.ExportData;
 import src.exportacaoImportacao.ImportDataMEC;
 import src.modeloDados.Aluno;
@@ -611,28 +612,25 @@ public static void informarSemestre() {
     System.out.println("Turma cadastrada com sucesso!");
   }
 
-  public static String exportarDadosEstudante(){
-    DataBase db = DataBase.getInstance();
-    ArrayList<String[]> data = new ArrayList<String[]>();
-    
   
-    ExportData exp = new ExportData();
-    ArrayList<Aluno> alunos = db.getAlunos();
-    for(int i = 0; i < alunos.size(); i++){
-      String[] sm = {"matricula", "alunos.get(i).getMatricula()"};
-      String[] sn = {"nome", alunos.get(i).getNome()};
-      String[] sc ={"cpf", alunos.get(i).getCpf()};
-      String[] st = {"telefone", alunos.get(i).getTelefone()};
-      String[] se =  {"endereco",alunos.get(i).getEndereco()};
-      data.add(sm);
-      data.add(sn);
-      data.add(sc);
-      data.add(st);
-      data.add(se);
+  
+   public static String exportarDadosEstudante() {
+    DataBase db = DataBase.getInstance();
+    ArrayList<String[]> data = new ArrayList<>();
 
+    ArrayList<Aluno> alunos = db.getAlunos();
+    for (Aluno aluno : alunos) {
+        data.add(new String[]{"matricula", aluno.getMatricula()});
+        data.add(new String[]{"nome", aluno.getNome()});
+        data.add(new String[]{"cpf", aluno.getCpf()});
+        data.add(new String[]{"telefone", aluno.getTelefone()});
+        data.add(new String[]{"endereco", aluno.getEndereco()});
     }
-    return exp.ArrayToXMLFormat(data, 5 , "student");
-  }
+
+    ExportData exp = new ExportData();
+    ExportAdapter adapter = new ExportAdapter(exp);
+    return adapter.convertToJson(data, 5, "student");
+}
 
   public static ImportDataMEC importDadosEstudanteMEC(){
      String data = exportarDadosEstudante();
