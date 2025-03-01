@@ -55,7 +55,7 @@ public class Main {
               break;
           case 2: 
           selecionarCoordenador();
-          menuCoordenador();
+            
               break; 
               case 3: 
               exportarDadosEstudante();
@@ -258,6 +258,7 @@ public class Main {
     if (!temCoordenador) {
         System.out.println("Nenhum coordenador cadastrado.");
         cadastarCoordenador(); 
+
         return null; 
     }
 
@@ -329,6 +330,19 @@ public static void informarSemestre() {
 
       db.getCursos().get(escolhaCurso).vincularCoordenador( db.getProfessores().get(escolhaProfessor));
       System.out.println(db.getProfessores().get(escolhaProfessor).getNome() + " agora é o coordenador.");
+      System.out.print("Informe a senha: ");
+      Scanner entrada = new Scanner(System.in); 
+      String senhaCoordenador  = entrada.next();
+      ArrayList<Professor> professores = db.getProfessores();
+      
+          if (senhaCoordenador.equals(professores.get(escolhaProfessor - 1).getSenha())) { 
+             
+              System.out.println("Senha verificada com sucesso!");
+              menuCoordenador();
+          } else {
+              System.out.println("Senha inválida!");
+          }
+          
   }
 
 
