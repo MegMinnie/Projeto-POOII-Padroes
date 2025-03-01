@@ -1,6 +1,8 @@
 package src.exportacaoImportacao;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ExportAdapter {
     private ExportData exportData;
@@ -14,14 +16,33 @@ public class ExportAdapter {
         return xmlToJson(xml, tag);
     }
 
-    String xmlToJson(String xml, String tag) {
-        return xml
-            .replace("<?xml version=\"1.0\"?>", "")
-            .replace("<data>", "{ \"data\": {")
-            .replace("</data>", "} }")
-            .replace("<" + tag + ">", "{ \"" + tag + "\": {")
-            .replace("</" + tag + ">", "} }")
-            .replaceAll("<(.*?)>(.*?)</(.*?)>", "\"$1\": \"$2\"")
-            .trim();
+    private String xmlToJson(String xml, String tag) {
+        xml = xml.trim();
+
+        
+        if (xml.startsWith("<?xml")) {
+            xml = xml.substring(xml.indexOf("?>") + 2).trim();
+        }
+
+     
+        StringBuilder json = new StringBuilder();
+        json.append("{ \"data\": {");
+
+        
+        Pattern pattern = Pattern.compile("<(.*?)>(.*?)</\\1>");
+        Matcher matcher = pattern.matcher(xml);
+
+        boolean firstElement = true;
+
+        while (matcher.find()) {
+            if (!firstElement) {
+                json.append(", ");
+            }
+            json.append("\"").append(matcher.group(1)).append("\": \"").append(matcher.group(2)).append("\"");
+            firstElement = false;
+        }
+
+        json.append("} }");
+        return json.toString();
     }
 }

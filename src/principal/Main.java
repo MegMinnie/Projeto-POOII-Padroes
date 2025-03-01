@@ -43,12 +43,12 @@ public class Main {
       System.out.println("║       1 - Selecionar professor     ║");
       System.out.println("║     2 - Selecionar coordernador    ║");;
       System.out.println("║  3 - Exportar dados dos estudantes ║");;
-      System.out.println("║    4 - importDadosEstudanteMEC     ║");;
+      System.out.println("║  4 - importar Dados EstudanteMEC   ║");;
       System.out.println("║             0 - Sair               ║");
       System.out.println("╚════════════════════════════════════╝");
       System.out.print("Opção: ");
       opcao = entrada.nextInt(); 
-  
+   
       switch (opcao) {
           case 1: 
           SelecionarProfessor();
