@@ -12,6 +12,12 @@ public class AlunoTurma {
         this.nota = new Nota();
     }
 
+        public AlunoTurma(Double nota)
+    {
+        this.Estado = new Ativo(this);
+        this.Estado(nota);
+    }
+
     public AlunoTurma(Aluno aluno, Nota nota){
         this.aluno = aluno;
         this.nota =nota;
