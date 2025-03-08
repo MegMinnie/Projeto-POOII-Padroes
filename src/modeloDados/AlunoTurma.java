@@ -3,6 +3,7 @@ package src.modeloDados;
 public class AlunoTurma {
     private Aluno aluno;
     private Nota nota;
+    private Estado estado;
 
     public AlunoTurma(){}
     
@@ -31,4 +32,15 @@ public class AlunoTurma {
     public void setAluno(Aluno aluno){
         this.aluno = aluno;
     }
+
+    
+    public estado getEstado(){
+        return estado;
+    }
+
+    public void setEstado(Estado estado){
+        this.estado = estado;
+    }
+
+    
 }
